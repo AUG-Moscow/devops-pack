@@ -1,0 +1,4 @@
+$i18n.getText("commit-validator.view.label"):
+#foreach ($resolution in ${submittedResolutions})
+    <strong>$resolution.name</strong>#if ($velocityCount != ${submittedResolutions.size()}), #end
+#end
