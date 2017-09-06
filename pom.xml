@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ru.augspb.plugins</groupId>
     <artifactId>devops-pack</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <organization>
         <name>Atlassian User Group Saint-Petersburg</name>
         <url>http://augspb.ru/</url>
