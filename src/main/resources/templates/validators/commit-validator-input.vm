@@ -1,0 +1,60 @@
+<script type="text/javascript">
+    function move(from, to) {
+        var fromList = document.getElementById(from);
+        var toList = document.getElementById(to);
+        for (var i = fromList.options.length - 1; i >= 0; i--) {
+            var option = fromList.options[i];
+            if (option.selected === true) {
+                var newOption = option.cloneNode(true);
+                fromList.removeChild(option);
+                toList.appendChild(newOption);
+            }
+        }
+
+        var selected = document.getElementById('selectedResolutions');
+        var submitted = document.getElementById('submittedResolutions');
+
+        submitted.value = '';
+
+        for (var i = 0; i < selected.length; i++) {
+            submitted.value += selected[i].value + '|';
+        }
+    }
+</script>
+<tr>
+    <td  style="width: 40%">
+        <span>$i18n.getText("commit-validator.resolutions.label"):</span>
+    </td>
+    <td>
+        <table>
+            <tr>
+                <td>
+                    <span>$i18n.getText("commit-validator.available"):</span><br>
+                    <select id="availableResolutions" name="availableResolutions" multiple size="10" style="width: 120px">
+                        #foreach ($resolution in ${availableResolutions})
+                            <option value="${resolution.name}">$textutils.htmlEncode(${resolution.name})</option>
+                        #end
+                    </select>
+
+                    <input id="submittedResolutions" name="submittedResolutions" type="hidden" value="$textutils.htmlEncode($!{submittedResolutions})">
+                </td>
+
+                <td align="center">
+                    <button type=button onclick="move('availableResolutions', 'selectedResolutions');">$i18n.getText("commit-validator.add.label") &gt;&gt;</button>
+                    <br>
+                    <button style="margin-top: 10px" type=button onclick="move('selectedResolutions', 'availableResolutions');">&lt;&lt; $i18n.getText("commit-validator.remove.label")</button>
+                </td>
+                <td>
+                    <span class="label">$i18n.getText("commit-validator.selected"):</span><br>
+                    <select id="selectedResolutions" name="selectedResolutions" multiple size="10" style="width: 120px">
+                        #if (${selectedResolutions})
+                            #foreach ($resolution in ${selectedResolutions})
+                                <option value="${resolution.name}">commit.htmlEncode(${resolution.name})</option>
+                            #end
+                        #end
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>

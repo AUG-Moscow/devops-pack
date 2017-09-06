@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
+  <plugin-info>
+    <description>${project.description}</description>
+    <version>${project.version}</version>
+    <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+    <param name="plugin-icon">images/pluginIcon.png</param>
+    <param name="plugin-logo">images/pluginLogo.png</param>
+  </plugin-info>
+  <!-- add our i18n resource -->
+  <resource type="i18n" name="i18n" location="devops-pack"/>
+  <!-- add our web resources -->
+  <workflow-validator key="commit-validator" name="Commit Validator" i18n-name-key="commit-validator.name" class="ru.augspb.plugins.jira.workflow.CommitValidatorFactory">
+    <description key="commit-validator.description">The Commit Validator Plugin (This validator check for issue existing commit for set Resolution = 'Fixed')</description>
+    <validator-class>ru.augspb.plugins.jira.workflow.validator.CommitValidator</validator-class>
+    <resource type="velocity" name="view" location="templates/validators/commit-validator.vm"/>
+    <resource type="velocity" name="input-parameters" location="templates/validators/commit-validator-input.vm"/>
+    <resource type="velocity" name="edit-parameters" location="templates/validators/commit-validator-input.vm"/>
+  </workflow-validator>
+</atlassian-plugin>
